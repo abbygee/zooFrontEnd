@@ -1,9 +1,9 @@
 var allAnimals = [];
 
 $(document).ready(function(){
-    $("body").onload(function () {
-       start();
-    });
+    // $("#body").onload(function () {
+    //    start();
+    // });
     $("#create").click(function(){
         createAnimal($("#name").val());
     });
@@ -16,8 +16,9 @@ function start(){
     var tig = new Tiger("Tigger");
     var pooh = new Bear("Pooh");
     var rare = new Unicorn("Rarity");
-    var gemma = new Giraffe("Gemma");
-    var sting = new Bee("Stinger")
+    var gem = new Giraffe("Gemma");
+    var sting = new Bee("Stinger");
+    allAnimals.push(tig, pooh, rare, gem, sting);
 }
 
 function createAnimal(name){
@@ -51,6 +52,12 @@ function feedAnimals(food){
 function listAnimals(ani){
     allAnimals.push(ani);
     console.log(allAnimals);
+
+    var names = [];
+    for(var i = 0; i < allAnimals.length; i++){
+        names.push(allAnimals[i].name);
+    }
+    console.log(names);
 }
 
 function deleteAnimal(name){
