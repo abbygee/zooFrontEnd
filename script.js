@@ -50,13 +50,16 @@ function feedAnimals(food){
 
 function listAnimals(ani){
     allAnimals.push(ani);
-    console.log("Your list of animals:");
+    $("#list").text("Your animal list:");
+
     for(var i = 0; i < allAnimals.length; i++){
         var curType = allAnimals[i].constructor.name;
         var curName = allAnimals[i].name;
         var curFood = allAnimals[i].favoriteFood;
+        var curID = allAnimals[i].constructor.name + i;
 
-        console.log(curName + " the " + curType + ". Favorite food: " + curFood + ".");
+        //console.log(curName + " the " + curType + ". Favorite food: " + curFood + ".");
+        $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + '. Favorite food: ' + curFood + '.</div>');
     }
 }
 
