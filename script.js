@@ -1,9 +1,7 @@
 var allAnimals = [];
 
 $(document).ready(function(){
-    // $("#body").onload(function () {
-    //    start();
-    // });
+    start();
     $("#create").click(function(){
         createAnimal($("#name").val());
     });
@@ -18,6 +16,7 @@ function start(){
     var rare = new Unicorn("Rarity");
     var gem = new Giraffe("Gemma");
     var sting = new Bee("Stinger");
+
     allAnimals.push(tig, pooh, rare, gem, sting);
 }
 
@@ -51,13 +50,14 @@ function feedAnimals(food){
 
 function listAnimals(ani){
     allAnimals.push(ani);
-    console.log(allAnimals);
-
-    var names = [];
+    console.log("Your list of animals:");
     for(var i = 0; i < allAnimals.length; i++){
-        names.push(allAnimals[i].name);
+        var curType = allAnimals[i].constructor.name;
+        var curName = allAnimals[i].name;
+        var curFood = allAnimals[i].favoriteFood;
+
+        console.log(curName + " the " + curType + ". Favorite food: " + curFood + ".");
     }
-    console.log(names);
 }
 
 function deleteAnimal(name){
@@ -88,14 +88,14 @@ class Animal {
 class Tiger extends Animal{
 
     constructor(name) {
-        super(name, "meat");
+        super(name, "Meat");
     }
 
 }
 
 class Bear extends Animal{
     constructor(name) {
-        super(name, "fish");
+        super(name, "Fish");
     }
 
     sleep() {
@@ -106,7 +106,7 @@ class Bear extends Animal{
 
 class Unicorn extends Animal{
     constructor(name){
-        super(name, "marshmallows")
+        super(name, "Marshmallows")
     }
 
     sleep(){
@@ -116,7 +116,7 @@ class Unicorn extends Animal{
 
 class Giraffe extends Animal{
     constructor(name){
-        super(name, "leaves");
+        super(name, "Leaves");
     }
 
     eat(food){
@@ -126,7 +126,7 @@ class Giraffe extends Animal{
 
 class Bee extends Animal{
     constructor(name){
-        super(name, "pollen")
+        super(name, "Pollen")
     }
 
     sleep(){
@@ -138,16 +138,16 @@ class Bee extends Animal{
     }
 }
 
-class Zookeeper {
-    constructor(name){
-        this.name = name;
-    }
-
-    feedAnimals (animals, food) {
-        console.log(this.name + " is feeding " + food + " to " + animals.length + " of " + animalPopulation + " total animals");
-
-        for(var i = 0; i < animals.length; i++){
-            animals[i].eat(food);
-        }
-    }
-}
+// class Zookeeper {
+//     constructor(name){
+//         this.name = name;
+//     }
+//
+//     feedAnimals (animals, food) {
+//         console.log(this.name + " is feeding " + food + " to " + animals.length + " of " + animalPopulation + " total animals");
+//
+//         for(var i = 0; i < animals.length; i++){
+//             animals[i].eat(food);
+//         }
+//     }
+// }

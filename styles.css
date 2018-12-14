@@ -3,4 +3,22 @@ body{
     display: block;
     margin-right: auto;
     margin-left: auto;
+    background-image: url("zoo.jpg");
+    font-size: 40px;
+    font-family: "Times New Roman";
+}
+
+#name, #type, #food {
+    width: inherit;
+    height: inherit;
+    font-size: 20px;
+    font-family: "Times New Roman";
+}
+
+#create, #feed{
+    height: inherit;
+    width: inherit;
+    font-size: 25px;
+    cursor: pointer;
+    font-family: "Times New Roman";
 }
