@@ -1,5 +1,4 @@
 var allAnimals = [];
-
 $(document).ready(function(){
     start();
     $("#create").click(function(){
@@ -18,6 +17,14 @@ function start(){
     var sting = new Bee("Stinger");
 
     allAnimals.push(tig, pooh, rare, gem, sting);
+
+    for(var i = 0; i < allAnimals.length; i++){
+        var curType = allAnimals[i].constructor.name;
+        var curName = allAnimals[i].name;
+        var curFood = allAnimals[i].favoriteFood;
+        var curID = allAnimals[i].constructor.name + i;
+        $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + '. Favorite food: ' + curFood + '.</div>');
+    }
 }
 
 function createAnimal(name){
@@ -41,7 +48,6 @@ function createAnimal(name){
     listAnimals(ani);
 }
 
-
 function feedAnimals(food){
     for(i = 0; i < allAnimals.length; i++){
         allAnimals[i].eat(food);
@@ -50,22 +56,25 @@ function feedAnimals(food){
 
 function listAnimals(ani){
     allAnimals.push(ani);
-    $("#list").text("Your animal list:");
 
-    for(var i = 0; i < allAnimals.length; i++){
-        var curType = allAnimals[i].constructor.name;
-        var curName = allAnimals[i].name;
-        var curFood = allAnimals[i].favoriteFood;
-        var curID = allAnimals[i].constructor.name + i;
+    for(var i = 0; i < allAnimals.length; i++) {
+        if(allAnimals[i] === ani){
+            var curType = allAnimals[i].constructor.name;
+            var curName = allAnimals[i].name;
+            var curFood = allAnimals[i].favoriteFood;
+            var curID = allAnimals[i].constructor.name + i;
 
-        //console.log(curName + " the " + curType + ". Favorite food: " + curFood + ".");
-        $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + '. Favorite food: ' + curFood + '.</div>');
+            $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + '. Favorite food: ' + curFood + '.</div>');
+        }
     }
 }
 
-function deleteAnimal(name){
-    listAnimals();
-}
+// function deleteAnimal(name){
+//     $("#each").click(function(){
+//         $()
+//     });
+//     listAnimals();
+// }
 
 class Animal {
     constructor(name, favoriteFood){
