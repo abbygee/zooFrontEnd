@@ -7,9 +7,9 @@ $(document).ready(function(){
     $("#feed").click(function(){
         feedAnimals($("#food").val());
     });
-    // $("#each").click(function(){
-    //     deleteAnimal();
-    // });
+    $("#delete").click(function(){
+        deleteAnimal($("#del").val());
+    });
 });
 
 function start(){
@@ -25,8 +25,8 @@ function start(){
         var curType = allAnimals[i].constructor.name;
         var curName = allAnimals[i].name;
         var curFood = allAnimals[i].favoriteFood;
-        var curID = i;
-        $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + ' -- Favorite food: ' + curFood + '</div>');
+        // var curID = i;
+        $("#each").append('<div class="' + curName + '">' + curName + ' the ' + curType + ' -- Favorite food: ' + curFood + '</div>');
     }
 }
 
@@ -70,21 +70,24 @@ function listAnimals(ani){
             var curType = allAnimals[i].constructor.name;
             var curName = allAnimals[i].name;
             var curFood = allAnimals[i].favoriteFood;
-            var curID = allAnimals[i].constructor.name + i;
+            // var curID = allAnimals[i].constructor.name + i;
 
-            $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + ' -- Favorite food: ' + curFood + '</div>');
+            $("#each").append('<div class="' + curName + '">' + curName + ' the ' + curType + ' -- Favorite food: ' + curFood + '</div>');
         }
     }
 }
 
-// function deleteAnimal(){
-//     for(var i = 0; i < allAnimals.length; i++){
-//         if(allAnimals[i] === )
-//         var noAni = "#" + i;
-//         $(noAni).hide();
-//     }
-//     listAnimals();
-// }
+function deleteAnimal(name){
+    for(var i = 0; i < allAnimals.length; i++){
+        // if(allAnimals[i].name !== name){
+        //     alert("Please enter a name of an Animal you currently have :)");
+        // }
+        if(allAnimals[i].name === name){
+            allAnimals.splice(i, 1);
+        }
+    }
+    $("." + name).hide();
+}
 
 class Animal {
     constructor(name, favoriteFood){
@@ -101,10 +104,6 @@ class Animal {
 
         (food === this.favoriteFood) ? $("#log").append("YUM!!! " + this.name + " wants more " + food + "<br>") : this.sleep();
     }
-
-    // static getPopulation() {
-    //     return animalPopulation;
-    // }
 }
 
 class Tiger extends Animal{
@@ -159,17 +158,3 @@ class Bee extends Animal{
         (food === this.favoriteFood) ? super.eat("pollen") : $("#log").append("YUCK!!! " + this.name + " will not eat " + food + "<br>");
     }
 }
-
-// class Zookeeper {
-//     constructor(name){
-//         this.name = name;
-//     }
-//
-//     feedAnimals (animals, food) {
-//         $("#log").append(this.name + " is feeding " + food + " to " + animals.length + " of " + animalPopulation + " total animals");
-//
-//         for(var i = 0; i < animals.length; i++){
-//             animals[i].eat(food);
-//         }
-//     }
-// }
