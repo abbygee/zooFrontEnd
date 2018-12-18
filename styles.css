@@ -3,9 +3,11 @@ body{
     display: block;
     margin-right: auto;
     margin-left: auto;
-    background-image: url("zoo.jpg");
+    /*background-image: url("zoo.jpg");*/
     font-size: 40px;
     font-family: "Times New Roman";
+    font-weight: bold;
+    background: #347847 url("zoo.jpg") no-repeat left top;
 }
 
 #name, #type, #food {
@@ -24,9 +26,35 @@ body{
 }
 
 #container{
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
-    background-color: rgba(255, 255, 255, 0.3);
-    font-size: 40px;
+    position: relative;
+    left: 5%;
+    bottom: 300px;
+    width: 30%;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+}
+
+#list, #keep{
+    background-color: white;
+    font-weight: bold;
+}
+
+#each{
+    font-weight: lighter;
+    line-height: 2.0;
+}
+
+#log{
+    font-weight: lighter;
+    line-height: 2.0;
+}
+
+#container2{
+    position: relative;
+    left: 65%;
+    width: 30%;
+    bottom: 530px;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+    z-index: -1;
 }

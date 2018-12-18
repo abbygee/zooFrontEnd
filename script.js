@@ -7,6 +7,9 @@ $(document).ready(function(){
     $("#feed").click(function(){
         feedAnimals($("#food").val());
     });
+    // $("#each").click(function(){
+    //     deleteAnimal();
+    // });
 });
 
 function start(){
@@ -22,34 +25,39 @@ function start(){
         var curType = allAnimals[i].constructor.name;
         var curName = allAnimals[i].name;
         var curFood = allAnimals[i].favoriteFood;
-        var curID = allAnimals[i].constructor.name + i;
-        $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + '. Favorite food: ' + curFood + '.</div>');
+        var curID = i;
+        $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + ' -- Favorite food: ' + curFood + '</div>');
     }
 }
 
 function createAnimal(name){
-    var ani = "";
-    switch($("#type").val()){
-        case "Tiger":
-           ani = new Tiger(name);
-           break;
-        case "Bear":
-            ani = new Bear(name);
-            break;
-        case "Unicorn":
-            ani = new Unicorn(name);
-            break;
-        case "Giraffe":
-            ani = new Giraffe(name);
-            break;
-        case "Bee":
-            ani = new Bee(name);
+    if(name.length !== 0){
+        var ani = "";
+        switch($("#type").val()){
+            case "Tiger":
+                ani = new Tiger(name);
+                break;
+            case "Bear":
+                ani = new Bear(name);
+                break;
+            case "Unicorn":
+                ani = new Unicorn(name);
+                break;
+            case "Giraffe":
+                ani = new Giraffe(name);
+                break;
+            case "Bee":
+                ani = new Bee(name);
+        }
+        listAnimals(ani);
+    }else{
+        alert("Please give your animal a name :(");
     }
-    listAnimals(ani);
+
 }
 
 function feedAnimals(food){
-    for(i = 0; i < allAnimals.length; i++){
+    for(var i = 0; i < allAnimals.length; i++){
         allAnimals[i].eat(food);
     }
 }
@@ -64,15 +72,17 @@ function listAnimals(ani){
             var curFood = allAnimals[i].favoriteFood;
             var curID = allAnimals[i].constructor.name + i;
 
-            $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + '. Favorite food: ' + curFood + '.</div>');
+            $("#each").append('<div id="' + curID + '">' + curName + ' the ' + curType + ' -- Favorite food: ' + curFood + '</div>');
         }
     }
 }
 
-// function deleteAnimal(name){
-//     $("#each").click(function(){
-//         $()
-//     });
+// function deleteAnimal(){
+//     for(var i = 0; i < allAnimals.length; i++){
+//         if(allAnimals[i] === )
+//         var noAni = "#" + i;
+//         $(noAni).hide();
+//     }
 //     listAnimals();
 // }
 
@@ -83,13 +93,13 @@ class Animal {
     }
 
     sleep() {
-        console.log(this.name + " sleeps for 8 hours");
+        $("#log").append(this.name + " sleeps for 8 hours<br>");
     }
 
     eat(food) {
-        console.log(this.name + " eats " + food);
+        $("#log").append(this.name + " eats " + food + "<br>");
 
-        (food === this.favoriteFood) ? console.log("YUM!!! " + this.name + " wants more " + food) : this.sleep();
+        (food === this.favoriteFood) ? $("#log").append("YUM!!! " + this.name + " wants more " + food + "<br>") : this.sleep();
     }
 
     // static getPopulation() {
@@ -111,7 +121,7 @@ class Bear extends Animal{
     }
 
     sleep() {
-        console.log(this.name + " hibernates for 4 months");
+        $("#log").append(this.name + " hibernates for 4 months<br>");
 
     }
 }
@@ -122,7 +132,7 @@ class Unicorn extends Animal{
     }
 
     sleep(){
-        console.log(this.name + " sleeps in a cloud");
+        $("#log").append(this.name + " sleeps in a cloud<br>");
     }
 }
 
@@ -132,7 +142,7 @@ class Giraffe extends Animal{
     }
 
     eat(food){
-        (food === this.favoriteFood) ? super.eat("leaves") : console.log("YUCK!!! " + this.name + " will not eat " + food);
+        (food === this.favoriteFood) ? super.eat("leaves") : $("#log").append("YUCK!!! " + this.name + " will not eat " + food + "<br>");
     }
 }
 
@@ -142,11 +152,11 @@ class Bee extends Animal{
     }
 
     sleep(){
-        console.log(this.name + " never sleeps");
+        $("#log").append(this.name + " never sleeps<br>");
     }
 
     eat(food){
-        (food === this.favoriteFood) ? super.eat("pollen") : console.log("YUCK!!! " + this.name + " will not eat " + food);
+        (food === this.favoriteFood) ? super.eat("pollen") : $("#log").append("YUCK!!! " + this.name + " will not eat " + food + "<br>");
     }
 }
 
@@ -156,7 +166,7 @@ class Bee extends Animal{
 //     }
 //
 //     feedAnimals (animals, food) {
-//         console.log(this.name + " is feeding " + food + " to " + animals.length + " of " + animalPopulation + " total animals");
+//         $("#log").append(this.name + " is feeding " + food + " to " + animals.length + " of " + animalPopulation + " total animals");
 //
 //         for(var i = 0; i < animals.length; i++){
 //             animals[i].eat(food);
