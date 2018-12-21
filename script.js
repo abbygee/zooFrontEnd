@@ -1,4 +1,4 @@
-var allAnimals = [];
+let allAnimals = [];
 $(document).ready(function(){
     start();
     $("#create").click(function(){
@@ -13,26 +13,34 @@ $(document).ready(function(){
 });
 
 function start(){
-    var tig = new Tiger("Tigger");
-    var pooh = new Bear("Pooh");
-    var rare = new Unicorn("Rarity");
-    var gem = new Giraffe("Gemma");
-    var sting = new Bee("Stinger");
+    let tig = new Tiger("Tigger");
+    let pooh = new Bear("Pooh");
+    let rare = new Unicorn("Rarity");
+    let gem = new Giraffe("Gemma");
+    let sting = new Bee("Stinger");
 
     allAnimals.push(tig, pooh, rare, gem, sting);
 
-    for(var i = 0; i < allAnimals.length; i++){
-        var curType = allAnimals[i].constructor.name;
-        var curName = allAnimals[i].name;
-        var curFood = allAnimals[i].favoriteFood;
-        // var curID = i;
+    for(let i = 0; i < allAnimals.length; i++){
+        let curType = allAnimals[i].constructor.name;
+        let curName = allAnimals[i].name;
+        let curFood = allAnimals[i].favoriteFood;
+        // let curID = i;
         $("#each").append('<div class="' + curName + '">' + curName + ' the ' + curType + ' -- Favorite food: ' + curFood + '</div>');
     }
 }
 
 function createAnimal(name){
-    if(name.length !== 0){
-        var ani = "";
+    //Creates a new animal only under the circumstances that
+    //it has a unique name throughout all of the animals
+    //and it has a name length of at least one character
+    let animalNames = [];
+    for(let i = 0; i < allAnimals.length; i++){
+        animalNames.push(allAnimals[i].name);
+    }
+    let checkName = animalNames.includes(name);
+    if((name.length !== 0) && (checkName === false)){
+        let ani = "";
         switch($("#type").val()){
             case "Tiger":
                 ani = new Tiger(name);
@@ -51,13 +59,15 @@ function createAnimal(name){
         }
         listAnimals(ani);
     }else{
-        alert("Please give your animal a name :(");
+        alert("Please give your animal a unique name :(");
     }
-
 }
 
 function feedAnimals(food){
-    for(var i = 0; i < allAnimals.length; i++){
+    //clear out div
+    $("#log").html("");
+
+    for(let i = 0; i < allAnimals.length; i++){
         allAnimals[i].eat(food);
     }
 }
@@ -65,25 +75,23 @@ function feedAnimals(food){
 function listAnimals(ani){
     allAnimals.push(ani);
 
-    for(var i = 0; i < allAnimals.length; i++) {
+    for(let i = 0; i < allAnimals.length; i++) {
         if(allAnimals[i] === ani){
-            var curType = allAnimals[i].constructor.name;
-            var curName = allAnimals[i].name;
-            var curFood = allAnimals[i].favoriteFood;
-            // var curID = allAnimals[i].constructor.name + i;
+            let curType = allAnimals[i].constructor.name;
+            let curName = allAnimals[i].name;
+            let curFood = allAnimals[i].favoriteFood;
 
             $("#each").append('<div class="' + curName + '">' + curName + ' the ' + curType + ' -- Favorite food: ' + curFood + '</div>');
+            $("#log").append(curName + " the " + curType + " was created<br>");
         }
     }
 }
 
 function deleteAnimal(name){
-    for(var i = 0; i < allAnimals.length; i++){
-        // if(allAnimals[i].name !== name){
-        //     alert("Please enter a name of an Animal you currently have :)");
-        // }
+    for(let i = 0; i < allAnimals.length; i++){
         if(allAnimals[i].name === name){
-            allAnimals.splice(i, 1);
+            $("#log").append(name + " the " + allAnimals[i].constructor.name + " was deleted<br>");
+            allAnimals.splice(i, i);
         }
     }
     $("." + name).hide();
